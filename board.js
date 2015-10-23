@@ -2,8 +2,38 @@
   window.Hanoi = window.Hanoi || {};
 
   var Board = window.Hanoi.Board = function (numDiscs) {
-    this.numDiscs = numDiscs || 3;
-    this.stacks = [new Stack([3,2,1]), new Stack([]), new Stack([])];
+    this.numDiscs = numDiscs;
+    var startingStack = [];
+    for (var i = 1; i <= this.numDiscs; i++) {
+      startingStack.push(i);
+    }
+    this.stacks = [new Stack(startingStack), new Stack([]), new Stack([])];
+  };
+
+  Board.prototype.isValidMove = function (fromStack, toStack) {
+    return fromStack.topDisc() < toStack.topDisc();
+  };
+
+  Board.prototype.move = function (fromStack, toStack) {
+    if (isValidMove(fromStack, toStack)){
+      toStack.moveTo(fromStack.moveFrom());
+      return true;
+    } else {
+      return false;
+    }
+  };
+
+  Board.prototype.isWon = function () {
+    return this.stacks[1].length === this.numDiscs ||
+           this.stacks[2].length === this.numDiscs;
+  };
+
+  Board.prototype.render = function () {
+    var stacks = [];
+    this.stacks.forEach(function (stack){
+      stacks.push(stack.discs);
+    });
+    return stacks;
   };
 
   var Stack = window.Hanoi.Stack = function (discs) {
@@ -22,7 +52,7 @@
     this.discs.push(disc);
   };
 
-  Stack.prototype.validMove = function (otherStack) {
-    return this.topDisc() < otherStack.topDisc();
+  Stack.prototype.length = function () {
+    return this.discs.length;
   };
 })();
