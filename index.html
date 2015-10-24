@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Hanoi</title>
+    <script src="jquery-1.11.3.min.js" charset="utf-8"></script>
+  </head>
+  <body>
+    <h1>Hanoi!</h1>
+    <div id="Board"></div>
+
+    <script src="lib/board.js"></script>
+    <script src="lib/game.js"></script>
+    <script type="text/javascript">
+      var Game = new window.Hanoi.Game({$rootEl: $('#Board'), numDiscs: 3});
+      Game.play();
+    </script>
+  </body>
+</html>
