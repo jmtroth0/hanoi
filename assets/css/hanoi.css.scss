@@ -1,0 +1,56 @@
+html, body, figure, figcaption, ul, li, h1 {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font: inherit;
+  text-align: inherit;
+}
+
+ul {
+  list-style: none;
+}
+
+.group:after {
+  content: "";
+  clear: both;
+  display: block;
+}
+
+body {
+  font-family: sans-serif;
+  text-align: center;
+  font-weight: bold;
+}
+
+div.stacks {
+  background: #eee;
+  margin-top: 30px;
+  width: 80%;
+  height: 250px;
+  margin: 0 auto;
+}
+
+div.stack {
+  width: 33%;
+  height: 180px;
+  float: left;
+  position: relative;
+  margin-top: 70px;
+}
+
+div.stack:before {
+  content: "";
+  background: #663300;
+  position: absolute;
+  left: calc(50% - 5);
+  width: 10px;
+  height: 100%;
+  border-radius: 5px 5px 0 0;
+}
+
+div.disc {
+  background: brown;
+  border: 1px solid black;
+  border-radius: 20%;
+  position: absolute;
+}

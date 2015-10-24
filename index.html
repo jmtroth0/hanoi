@@ -3,14 +3,15 @@
   <head>
     <meta charset="utf-8">
     <title>Hanoi</title>
-    <script src="jquery-1.11.3.min.js" charset="utf-8"></script>
+    <script src="assets/utils/jquery-1.11.3.min.js" charset="utf-8"></script>
+    <link rel="stylesheet" href="assets/css/hanoi.css.scss">
+    <script src="assets/javascripts/board.js"></script>
+    <script src="assets/javascripts/game.js"></script>
   </head>
   <body>
     <h1>Hanoi!</h1>
     <div id="Board"></div>
 
-    <script src="lib/board.js"></script>
-    <script src="lib/game.js"></script>
     <script type="text/javascript">
       var Game = new window.Hanoi.Game({$rootEl: $('#Board'), numDiscs: 3});
       Game.play();
