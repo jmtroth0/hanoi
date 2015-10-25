@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <title>Hanoi</title>
     <script src="assets/utils/jquery-1.11.3.min.js" charset="utf-8"></script>
-    <script src="assets/utils/jquery-ui-1.11.4.custom" charset="utf-8"></script>
+    <script src="assets/utils/jquery-ui.min.js" charset="utf-8"></script>
     <link rel="stylesheet" href="assets/css/hanoi.css.scss">
     <script src="assets/javascripts/board.js"></script>
     <script src="assets/javascripts/game.js"></script>
@@ -14,8 +14,7 @@
     <div id="Board"></div>
 
     <script type="text/javascript">
-      var Game = new window.Hanoi.Game({$rootEl: $('#Board'), numDiscs: 5});
-      Game.play();
+      var Game = new window.Hanoi.Game({$rootEl: $('#Board'), numDiscs: 3});
     </script>
   </body>
 </html>

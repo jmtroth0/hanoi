@@ -10,7 +10,7 @@
   };
 
   Board.prototype.isValidMove = function (fromStack, toStack) {
-    return (!fromStack.isEmpty() && (
+    return (!fromStack.isEmpty() && fromStack !== toStack (
       toStack.isEmpty() || fromStack.topDisc() < toStack.topDisc()
     ));
   };
@@ -36,10 +36,10 @@
     var self = this;
     var discHeight = 150 / this.numDiscs;
     var discWidth = window.innerWidth / 3 / this.numDiscs - 40;
-    this.stacks.forEach(function(stack){
-      var $stack = $('<div>').addClass('stack group');
+    this.stacks.forEach(function(stack, idx){
+      var $stack = $('<div>').addClass('stack group').data('id', '' + idx);
       stack.each(function(disc, idx){
-        $stack.prepend($('<div>').addClass('disc').addClass('' + disc).css(
+        $disc = ($('<div>').addClass('disc').addClass('' + disc).css(
           "width", disc * discWidth + 'px'
         ).css(
           "bottom", (idx) * discHeight + 'px'
@@ -48,6 +48,7 @@
         ).css(
           "left", (window.innerWidth * 0.15 - (disc / 2 * discWidth + 17)) + 'px'
         ));
+        $stack.append($disc);
       });
       self.$el.append($stack);
     });
