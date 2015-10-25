@@ -17,14 +17,20 @@
     this.$rootEl.html(this.board.render().$el);
   };
 
-  Game.prototype.playTurn = function (e, ui) {
-    this.board.move(this.from, parseInt($(e.target).data('id')));
+  Game.prototype.playTurn = function () {
+    this.board.move(this.from, this.to);
+    this.from = null;
+    this.to = null;
     this.render();
     if (!this.board.isWon()){
       this.enableDragAndDrop();
     } else {
       this.gameOverProtocol();
     }
+  };
+
+  Game.prototype.solve = function (board) {
+    board = [board[0].dup(), board[1].dup(), board[2].dup()];
   };
 
   Game.prototype.enableDragAndDrop = function () {
@@ -45,12 +51,17 @@
     });
     this.$rootEl.find('.stack').droppable({
       accept: '.stack > .disc:last-child',
-      drop: this.playTurn.bind(this)
+      drop: this.getToMove.bind(this)
     });
   };
 
   Game.prototype.storeFromMove = function (e, ui) {
     this.from = parseInt(ui.helper.parent().data('id'));
+  };
+
+  Game.prototype.getToMove = function (e, ui) {
+    this.to = parseInt($(e.target).data('id'));
+    this.playTurn();
   };
 
   Game.prototype.getMove = function (type) {
