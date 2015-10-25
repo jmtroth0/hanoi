@@ -35,7 +35,8 @@
     this.$el = $('<div>').addClass('stacks');
     var self = this;
     var discHeight = 150 / this.numDiscs;
-    var discWidth = window.innerWidth / 3 / this.numDiscs - 40;
+    // debugger
+    var discWidth = window.innerWidth / 3 / this.numDiscs - 30;
     this.stacks.forEach(function(stack, idx){
       var $stack = $('<div>').addClass('stack group').data('id', '' + idx);
       stack.each(function(disc, idx){
