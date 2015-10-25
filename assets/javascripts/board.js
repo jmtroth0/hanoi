@@ -10,7 +10,7 @@
   };
 
   Board.prototype.isValidMove = function (fromStack, toStack) {
-    return (!fromStack.isEmpty() && fromStack !== toStack (
+    return (!fromStack.isEmpty() && fromStack !== toStack && (
       toStack.isEmpty() || fromStack.topDisc() < toStack.topDisc()
     ));
   };
