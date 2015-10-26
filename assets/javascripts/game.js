@@ -45,7 +45,6 @@
   };
 
   Game.prototype.runSolution = function (prevMoves) {
-    debugger
     if (prevMoves.length === 0){
       this.render();
       this.gameOverProtocol();
@@ -56,7 +55,7 @@
       setTimeout(function (){
         this.runSolution(prevMoves);
         this.render();
-      }.bind(this), 2000);
+      }.bind(this), 500);
     }
   };
 
