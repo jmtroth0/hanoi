@@ -29,32 +29,31 @@
     }
   };
 
-  Game.prototype.solve = function (disc, source, dest, spare, prevMoves) {
-    prevMoves = prevMoves || [];
+  Game.prototype.solveFromBeginning = function (disc, source, dest, spare, storedMoves) {
+    storedMoves = storedMoves || [];
     if (disc === 1) {
-      prevMoves.push([source, dest]);
+      storedMoves.push([source, dest]);
     } else {
-      this.solve(disc - 1, source, spare, dest, prevMoves);
-      prevMoves.push([source, dest]);
-      this.solve(disc - 1, spare, dest, source, prevMoves);
+      this.solveFromBeginning(disc - 1, source, spare, dest, storedMoves);
+      storedMoves.push([source, dest]);
+      this.solveFromBeginning(disc - 1, spare, dest, source, storedMoves);
     }
     if (disc === this.numDiscs) {
-      prevMoves.reverse();
-      this.runSolution(prevMoves);
+      storedMoves.reverse();
+      this.runSolution(storedMoves);
     }
   };
 
-  Game.prototype.runSolution = function (prevMoves) {
-    if (prevMoves.length === 0){
+  Game.prototype.runSolution = function (storedMoves) {
+    if (storedMoves.length === 0){
       this.render();
       this.gameOverProtocol();
     } else {
-      var move = prevMoves.pop();
-      this.board.move(move[0], move[1]);
-      this.render();
+      var move = storedMoves.pop();
       setTimeout(function (){
-        this.runSolution(prevMoves);
+        this.board.move(move[0], move[1]);
         this.render();
+        this.runSolution(storedMoves);
       }.bind(this), 500);
     }
   };
