@@ -28,7 +28,7 @@
       this.gameOverProtocol();
     }
   };
-// add a key to the source, dest, spare, to maintain order
+
   Game.prototype.solve = function (disc, source, dest, spare, prevMoves) {
     prevMoves = prevMoves || [];
     if (disc === 1) {
