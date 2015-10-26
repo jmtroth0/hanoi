@@ -14,7 +14,6 @@
       toStack.isEmpty() || fromStack.topDisc() < toStack.topDisc()
     ));
   };
-
   Board.prototype.move = function (fromStack, toStack) {
     toStack = this.stacks[toStack];
     fromStack = this.stacks[fromStack];
@@ -83,5 +82,9 @@
     this.discs.forEach(function(disc, idx){
       callback(disc, idx);
     });
+  };
+
+  Stack.prototype.slice = function (startIdx, endIdx) {
+    return new Stack(this.discs.slice(startIdx, endIdx));
   };
 })();

@@ -2,9 +2,9 @@
   window.Hanoi = window.Hanoi || {};
 
   var Game = window.Hanoi.Game = function (options) {
-    numDiscs = options.numDiscs || 3;
+    this.numDiscs = options.numDiscs || 3;
     this.$rootEl = options.$rootEl;
-    this.board = new window.Hanoi.Board(numDiscs);
+    this.board = new window.Hanoi.Board(this.numDiscs);
     this.setupGame();
   };
 
@@ -28,9 +28,36 @@
       this.gameOverProtocol();
     }
   };
+// add a key to the source, dest, spare, to maintain order
+  Game.prototype.solve = function (disc, source, dest, spare, prevMoves) {
+    prevMoves = prevMoves || [];
+    if (disc === 1) {
+      prevMoves.push([source, dest]);
+    } else {
+      this.solve(disc - 1, source, spare, dest, prevMoves);
+      prevMoves.push([source, dest]);
+      this.solve(disc - 1, spare, dest, source, prevMoves);
+    }
+    if (disc === this.numDiscs) {
+      prevMoves.reverse();
+      this.runSolution(prevMoves);
+    }
+  };
 
-  Game.prototype.solve = function (board) {
-    board = [board[0].dup(), board[1].dup(), board[2].dup()];
+  Game.prototype.runSolution = function (prevMoves) {
+    debugger
+    if (prevMoves.length === 0){
+      this.render();
+      this.gameOverProtocol();
+    } else {
+      var move = prevMoves.pop();
+      this.board.move(move[0], move[1]);
+      this.render();
+      setTimeout(function (){
+        this.runSolution(prevMoves);
+        this.render();
+      }.bind(this), 2000);
+    }
   };
 
   Game.prototype.enableDragAndDrop = function () {
