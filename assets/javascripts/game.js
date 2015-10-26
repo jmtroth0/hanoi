@@ -11,6 +11,7 @@
   Game.prototype.setupGame = function () {
     this.render();
     this.enableDragAndDrop();
+    this.prevMoves = [];
   };
 
   Game.prototype.render = function () {
@@ -19,6 +20,7 @@
 
   Game.prototype.playTurn = function () {
     this.board.move(this.from, this.to);
+    this.prevMoves.push([this.to, this.from]);
     this.from = null;
     this.to = null;
     this.render();
@@ -27,6 +29,10 @@
     } else {
       this.gameOverProtocol();
     }
+  };
+
+  Game.prototype.solve = function () {
+    this.solveFromBeginning(this.numDiscs, 0, 2, 1, this.prevMoves.reverse());
   };
 
   Game.prototype.solveFromBeginning = function (disc, source, dest, spare, storedMoves) {
